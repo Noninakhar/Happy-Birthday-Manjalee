@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday Shreya</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      background: url('Picsart6.jpg') no-repeat center center fixed;
+      background-size: cover;
+      transition: background 1s ease;
+      
+      /* Flexbox alignment */
+      display: flex;
+      flex-direction: column;
+      /* Aligns content to the bottom */
+      justify-content: flex-end; 
+      align-items: center;
+      /* Adjust this percentage to move the text higher or lower from the bottom */
+      padding-bottom: 15vh;
+      box-sizing: border-box;
+    }
+
+    .overlay {
+      background-color: transparent;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      left: -10px;
+      z-index: 3;
+      text-align: center;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    #countdown {
+      font-size: clamp(1.8em, 8vw, 20rem);
+      white-space: nowrap;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      color:#ffffff;
+    }
+
+    #countdownMessage {
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      white-space: nowrap;
+      margin-bottom: 20px;
+      margin-left: -100px ;
+      color: #ffffff;
+    }
+
+    #surpriseMessage {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 10;
+      background: #111;
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -220px;
+      width: 120px;
+      height: 160px;
+      background-color: red;
+      border-radius: 50%;
+      animation: floatUp 6s linear infinite;
+      z-index: 2;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -55px;
+      left: 50%;
+      width: 3px;
+      height: 60px;
+      background: white;
+      transform: translateX(-50%);
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-110vh); opacity: 0; }
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="overlay" id="overlay"></div>
+  <div class="content" id="content">
+    <div id="countdownMessage">A little surprise is baking 😚...</div>
+    <div id="countdown">Almost there✨...</div>
+    <div id="surpriseMessage"></div>
+  </div>
+
+  <script>
+    const countdownEl = document.getElementById('countdown');
+    const countdownMessage = document.getElementById('countdownMessage');
+    const surpriseMessage = document.getElementById('surpriseMessage');
+    const overlay = document.getElementById('overlay');
+
+    // Countdown: 1 minutes
+    const targetDate = new Date(new Date().getTime() + 12 * 1000);
+
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        clearInterval(timer);
+
+        countdownEl.remove();
+        countdownMessage.remove();
+        overlay.remove();
+
+        // Remove balloons
+        document.querySelectorAll('.balloon').forEach(b => b.remove());
+
+        // Show embedded main.html
+        document.body.style.background = '#111';
+        surpriseMessage.innerHTML = `<iframe src="main.html" style="position:fixed;top:0;left:0;width:100vw;height:100vh;border:none;"></iframe>`;
+        surpriseMessage.style.display = 'block';
+
+      } else {
+        const seconds = Math.floor((distance % (1000 * 12)) / 1000);
+        countdownEl.textContent = `${seconds}s`;
+      }
+    }, 1000);
+
+    // Balloons
+    for (let i = 0; i < 25; i++) {
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      balloon.style.left = Math.random() * 
+
+100 + 'vw';
+      const hue = Math.floor(Math.random() * 360);
+      balloon.style.backgroundColor = `hsl(${hue}, 90%, 65%)`;
+      balloon.style.animationDuration = (6 + Math.random() * 4) + 's';
+      balloon.style.animationDelay = Math.random() * 5 + 's';
+      document.body.appendChild(balloon);
+    }
+  </script>
+
+</body>
+</html>

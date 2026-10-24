@@ -1,0 +1,276 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  overflow: hidden;
+}
+.cake {
+  border-radius: 10px;
+  position: absolute;
+  width: 5px;
+  height: 35px; /* Note: Browser issues se bachne ke liye 'px' hona zaroori hai */
+  transform: translateY(-300px);
+  backface-visibility: hidden;
+  animation: in 500ms 6s ease-out forwards;
+}
+
+.cake:after,
+.cake:before {
+  background: rgba(255, 0, 0, 0.4);
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2.22222222px;
+}
+
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Make the cake BIG and centered */
+.cake-wrapper {
+  display: flex;
+  justify-content: center; /* Center alignment */
+  position: absolute;
+  top: 10%;   /* Thoda upar niche yahan se adjust karein */
+  left: 50%;  /* 84% se hata kar 50% kar diya taaki center mein rahe */
+  transform: translate(-50%, -50%) scale(5); /* Scale 9 se 5 kiya taaki choti screen pe fit aaye */
+  transform-origin: center center;
+  z-index: 1;
+}
+
+/* ============================================== Candle
+*/
+
+.velas {
+  background: #ffffff;
+  border-radius: 100px;
+  position: absolute;
+  top: 245px;
+  bottom: 500px;
+  left: 48%;
+  margin-left: 10px;
+  margin-top: 770px;
+  width: 20px;
+  height: 200px;
+  transform: translateY(-2600px);
+  backface-visibility: hidden;
+  animation: in 500ms 6s ease-out forwards;
+}
+
+.velas:after,
+.velas:before {
+  background: rgba(255, 0, 0, 0.4);
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 9.22222222px;
+}
+
+.velas:after {
+  top: 25%;
+  left: 0;
+}
+
+.velas:before {
+  top: 45%;
+  left: 0;
+}
+
+/* ============================================== Fire
+*/
+
+.fuego {
+  border-radius: 100%;
+  position: absolute;
+  top: -63px;
+  left: 5%;
+  margin-left: -4px;
+  width: 25px;
+  height: 65px;
+}
+
+.fuego:nth-child(1) {
+  animation: fuego 2s 6.5s infinite;
+}
+
+.fuego:nth-child(2) {
+  animation: fuego 1.5s 6.5s infinite;
+}
+
+.fuego:nth-child(3) {
+  animation: fuego 1s 6.5s infinite;
+}
+
+.fuego:nth-child(4) {
+  animation: fuego 0.5s 6.5s infinite;
+}
+
+.fuego:nth-child(5) {
+  animation: fuego 0.2s 6.5s infinite;
+}
+
+/* ============================================== Animation Fire
+*/
+
+@keyframes fuego {
+  0%, 100% {
+    background: rgba(254, 248, 97, 0.5);
+    box-shadow: 0 0 40px 10px rgba(248, 233, 209, 0.2);
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    background: rgba(255, 50, 0, 0.1);
+    box-shadow: 0 0 40px 20px rgba(248, 233, 209, 0.2);
+    transform: translateY(-20px) scale(0);
+  }
+}
+
+@keyframes in {
+  to {
+    transform: translateY(0);
+  }
+}
+
+.text {
+  /* Position absolute zaroori hai taaki ye cake ko niche na dhakele */
+  position: absolute;
+  left: 84%; /* Cake ke saath align karne ke liye wahi 84% */
+  bottom: 40%; /* Screen ke niche se thoda upar */
+  transform: translateX(-50%);
+  
+  width: 280px; /* Width thodi lamba rakha hai taaki text "chikna" dikhe */
+  text-align: center;
+  z-index: 100;
+  
+  /* Font styling */
+  color: #fff;
+  font-family: 'Lobster', cursive; /* Lobster font mast lagega Preshu ke liye */
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  line-height: 1.2; /* 0.8 se badha kar 1.2 kiya taaki lines saaf dikhein */
+}
+
+h1 {
+  font-size: 10px; /* 8px bahut chota tha, 10px ekdam perfect sweet spot hai */
+  margin-top: -20px;
+  margin-bottom: 5px;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 16px;
+  color: #d54d56; /* Birthday wish ke liye red color */
+  margin-top: 5px;
+}
+/* Balloon styles - Original Size with Background fix */
+.balloon {
+  position: absolute;
+  bottom: -250px;
+  width: 90px;
+  height: 130px;
+  border-radius: 50% 50% 45% 45%;
+  animation: rise 8s infinite ease-in;
+  opacity: 0.6;
+  z-index: 1; /* Isse balloons cake/text ke piche rahenge */
+  transform: translateX(-50%);
+}
+
+.balloon::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -60px;
+  width: 3px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.5); /* String white rakhi hai taaki dark photo par dikhe */
+  transform: translateX(-50%);
+}
+
+@keyframes rise {
+  0% { transform: translate(-50%, 0) scale(1); }
+  100% { transform: translate(-50%, -300vh) scale(1.3); }
+}
+/* Chumki Style - Bada Size aur Zyada Quantity */
+.confetti {
+  position: absolute;
+  top: -30px;
+  width: 15px; /* Bada size */
+  height: 15px;
+  opacity: 0.6;
+  z-index: 100;
+  animation: fall 8s linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(110vh) rotate(720deg); } /* Zyada rotation */
+}
+
+.square { border-radius: 0; }
+.circle { border-radius: 50%; }
+
+/* Random Colors */
+.c1 { background: #ff4d4d; }
+.c2 { background: #ffcc00; }
+.c3 { background: #2ecc71; }
+.c4 { background: #3498db; }
+.c5 { background: #9b59b6; }
+.c6 { background: #e67e22; }
+.c7 { background: #f4e83a; }
+.c8 { background: #4cd686; }
+.c9 { background: #ed4af9; }
+.c10 { background: #4272ec; }
+/* Music Player Styling - Fixed Version */
+.music-player {
+    position: fixed;
+    top: 185px;
+    right: 70px;
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 2px 8px; /* Thoda padding badhaya hai taaki button sahi dikhe */
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Icon aur Button ke beech space */
+    gap: 6px;
+    z-index: 10001; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 8px; /* 6px se badha kar 10px kiya taaki icon dikhe */
+    white-space: nowrap;
+}
+
+.play-button {
+    background: #ff4d4d; /* Transparent ki jagah color diya taaki button dikhe */
+    color: #fff;
+    border: none;
+    padding: 2px 6px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 8px; /* Extra symbol hata diya */
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 77, 77, 0.3);
+}
+
+.play-button:hover {
+    transform: scale(1.1);
+    background: #ff2a2a;
+}
